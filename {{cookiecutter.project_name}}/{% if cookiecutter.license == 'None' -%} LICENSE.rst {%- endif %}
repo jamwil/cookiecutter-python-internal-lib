@@ -1,0 +1,4 @@
+Closed Source
+=============
+
+Copyright © {% now 'utc', '%Y' %} {{ cookiecutter.author }}. All rights reserved.

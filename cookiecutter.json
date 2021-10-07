@@ -1,12 +1,12 @@
 {
-  "project_name": "hypermodern-python",
+  "project_name": "python-dev-tool",
   "package_name": "{{ cookiecutter.project_name.replace('-', '_') }}",
   "friendly_name": "{{ cookiecutter.project_name.replace('-', ' ').title() }}",
-  "author": "Claudio Jolowicz",
-  "email": "mail@claudiojolowicz.com",
-  "github_user": "cjolowicz",
+  "author": "James Williams",
+  "email": "james@kananlabs.org",
+  "github_user": "jamwil",
   "version": "0.0.0",
-  "license": ["MIT", "Apache-2.0", "GPL-3.0"],
+  "license": ["MIT", "Apache-2.0", "GPL-3.0", "None"],
   "development_status": [
     "Development Status :: 1 - Planning",
     "Development Status :: 2 - Pre-Alpha",

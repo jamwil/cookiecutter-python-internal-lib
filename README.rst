@@ -1,6 +1,16 @@
-===============================
-cookiecutter-hypermodern-python
-===============================
+============================
+cookiecutter-python-dev-tool
+============================
+
+Fork of cjolowicz/cookiecutter-hypermodern-python with modifications to support non-public internal development tools.
+
+- Removes support for old version of Python
+- Github Actions do not push to PyPI or TestPyPI
+- Allows for closed source license
+
+
+Original Documentation
+======================
 
 .. badges-begin
 
@@ -54,7 +64,7 @@ __ https://cookiecutter-hypermodern-python.readthedocs.io/
 
 
 Usage
-=====
+-----
 
 .. code:: console
 
@@ -62,7 +72,7 @@ Usage
 
 
 Features
-========
+--------
 
 .. features-begin
 

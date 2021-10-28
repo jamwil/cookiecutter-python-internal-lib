@@ -1,5 +1,5 @@
 {
-  "project_name": "python-dev-tool",
+  "project_name": "python-internal-lib",
   "package_name": "{{ cookiecutter.project_name.replace('-', '_') }}",
   "friendly_name": "{{ cookiecutter.project_name.replace('-', ' ').title() }}",
   "author": "James Williams",

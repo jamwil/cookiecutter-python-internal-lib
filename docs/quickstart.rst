@@ -27,7 +27,7 @@ Install Nox_ and nox-poetry_:
 
 pipx_ is preferred, but you can also install with ``pip install --user``.
 
-It is recommended to set up Python 3.6, 3.7, 3.8, and 3.9 using pyenv_.
+It is recommended to set up Python 3.7, 3.8, 3.9, 3.10 using pyenv_.
 
 
 Creating a project
@@ -38,7 +38,7 @@ Generate a Python project:
 .. code:: console
 
    $ cookiecutter gh:cjolowicz/cookiecutter-hypermodern-python \
-     --checkout="2021.7.15"
+     --checkout="2021.11.8"
 
 Change to the root directory of your new project,
 and create a Git repository:

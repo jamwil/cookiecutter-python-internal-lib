@@ -20,7 +20,7 @@ except ImportError as e:
 
 
 package = "{{cookiecutter.package_name}}"
-python_versions = ["3.9", "3.10"]
+python_versions = ["3.10", "3.9", "3.8", "3.7"]
 nox.needs_version = ">= 2021.6.6"
 nox.options.sessions = (
     "pre-commit",
@@ -43,8 +43,7 @@ def activate_virtualenv_in_precommit_hooks(session: Session) -> None:
     Args:
         session: The Session object.
     """
-    if session.bin is None:
-        return
+    assert session.bin is not None  # noqa: S101
 
     virtualenv = session.env.get("VIRTUAL_ENV")
     if virtualenv is None:

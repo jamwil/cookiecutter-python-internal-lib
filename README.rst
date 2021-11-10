@@ -68,7 +68,7 @@ Usage
 
 .. code:: console
 
-   $ cookiecutter gh:cjolowicz/cookiecutter-hypermodern-python --checkout=2021.7.15
+   $ cookiecutter gh:cjolowicz/cookiecutter-hypermodern-python --checkout=2021.11.8
 
 
 Features
@@ -97,7 +97,7 @@ Features
 - Generate command-line reference with sphinx-click_
 - Manage project labels with `GitHub Labeler`_
 
-The template supports Python 3.6, 3.7, 3.8, and 3.9.
+The template supports Python 3.7, 3.8, 3.9, and 3.10.
 
 .. features-end
 

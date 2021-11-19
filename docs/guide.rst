@@ -8,10 +8,6 @@ a Python template based on the `Hypermodern Python`_ article series.
 If you're in a hurry, check out the :doc:`quickstart guide <quickstart>`
 and the :ref:`tutorials <Tutorials>`.
 
-.. contents::
-    :local:
-    :backlinks: none
-
 
 Introduction
 ~~~~~~~~~~~~
@@ -61,9 +57,9 @@ Version policy
 
 The |HPC| uses `Calendar Versioning`_ with a ``YYYY.MM.DD`` versioning scheme.
 
-The current stable release is `2021.11.8`_.
+The current stable release is `2021.11.10`_.
 
-.. _2021.11.8: https://github.com/cjolowicz/cookiecutter-hypermodern-python/releases/tag/2021.11.8
+.. _2021.11.10: https://github.com/cjolowicz/cookiecutter-hypermodern-python/releases/tag/2021.11.10
 
 
 .. _Installation:
@@ -218,12 +214,20 @@ Creating a project
 
 Create a project from this template
 by pointing Cookiecutter to its `GitHub repository <Hypermodern Python Cookiecutter_>`__.
+<<<<<<< HEAD
 Use the ``--checkout`` option with the `current stable release <2021.11.8_>`__:
+=======
+Use the ``--checkout`` option with the `current stable release <2021.11.10_>`__:
+>>>>>>> cjolowicz/main
 
 .. code:: console
 
    $ cookiecutter gh:cjolowicz/cookiecutter-hypermodern-python \
+<<<<<<< HEAD
      --checkout="2021.11.8"
+=======
+     --checkout="2021.11.10"
+>>>>>>> cjolowicz/main
 
 Cookiecutter downloads the template,
 and asks you a series of questions about project variables,
@@ -235,7 +239,6 @@ using a subdirectory with the same name as your project.
 Here is a complete list of the project variables defined by this template:
 
 .. table:: Project variables
-   :class: hypermodern-table
    :widths: auto
 
    ====================== ================================= ===================================
@@ -337,7 +340,6 @@ This section provides an overview of all the files generated for your project.
 Let's start with the directory layout:
 
 .. table:: Directories
-   :class: hypermodern-table
    :widths: auto
 
    ===================================== ===============================
@@ -351,7 +353,6 @@ The Python package is located in the ``src/<package>`` directory.
 For more details on these files, refer to the section :ref:`The initial package`.
 
 .. table:: Python package
-   :class: hypermodern-table
    :widths: auto
 
    ===================================== ===============================
@@ -364,7 +365,6 @@ The test suite is located in the ``tests`` directory.
 For more details on these files, refer to the section :ref:`The test suite`.
 
 .. table:: Test suite
-   :class: hypermodern-table
    :widths: auto
 
    ===================================== ===============================
@@ -376,7 +376,6 @@ The project documentation is written in reStructuredText_.
 The documentation files in the top-level directory are rendered on GitHub_:
 
 .. table:: Documentation files (top-level)
-   :class: hypermodern-table
    :widths: auto
 
    ======================= ============================================
@@ -391,7 +390,6 @@ built using :ref:`Sphinx <Documentation>` and
 hosted on :ref:`Read the Docs <Read the Docs integration>`:
 
 .. table:: Documentation files (Sphinx)
-   :class: hypermodern-table
    :widths: auto
 
    ====================== =======================================================
@@ -405,7 +403,6 @@ hosted on :ref:`Read the Docs <Read the Docs integration>`:
 The ``.github/workflows`` directory contains the :ref:`GitHub Actions workflows <GitHub Actions workflows>`:
 
 .. table:: GitHub Actions workflows
-   :class: hypermodern-table
    :widths: auto
 
    ======================= ===============================
@@ -420,7 +417,6 @@ The table below lists these files,
 and links each file to a section with more details.
 
 .. table:: Configuration files
-   :class: hypermodern-table
    :widths: auto
 
    ===================================== ========================================
@@ -450,7 +446,6 @@ The table below lists some additional files with pinned dependencies.
 Follow the links for more details on these.
 
 .. table:: Dependency files
-   :class: hypermodern-table
    :widths: auto
 
    ===================================== ================================
@@ -616,7 +611,7 @@ __ https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 The project documentation is built and hosted on
 :ref:`Read the Docs <Read the Docs integration>`,
-and uses their official theme sphinx-rtd-theme_.
+and uses the furo_ Sphinx theme.
 
 You can also build the documentation locally using Nox,
 see :ref:`The docs session`.
@@ -736,7 +731,6 @@ The template also comes with various development dependencies.
 See the table below for an overview of the dependencies of generated projects:
 
 .. table:: Dependencies
-   :class: hypermodern-table
    :widths: auto
 
    ======================= ====================================================================================
@@ -744,22 +738,24 @@ See the table below for an overview of the dependencies of generated projects:
    click_                  Composable command line interface toolkit
    coverage__              Code coverage measurement for Python
    darglint_               A utility for ensuring Google-style docstrings stay up to date with the source code.
-   flake8_                 The modular source code checker: pep8 pyflakes and co
+   flake8_                 the modular source code checker: pep8 pyflakes and co
    flake8-bandit_          Automated security testing with bandit and flake8.
    flake8-bugbear_         A plugin for flake8 finding likely bugs and design problems in your program.
    flake8-docstrings_      Extension for flake8 which uses pydocstyle to check docstrings
    flake8-rst-docstrings_  Python docstring reStructuredText (RST) validator
+   furo_                   A clean customisable Sphinx documentation theme.
    mypy_                   Optional static typing for Python
    pep8-naming_            Check PEP-8 naming conventions, plugin for flake8
-   pre-commit_             A framework for managing and maintaining multi-language pre-commit hooks
+   pre-commit_             A framework for managing and maintaining multi-language pre-commit hooks.
    pre-commit-hooks_       Some out-of-the-box hooks for pre-commit.
-   pytest_                 Simple powerful testing with Python
+   pygments_               Pygments is a syntax highlighting package written in Python.
+   pytest_                 pytest: simple powerful testing with Python
+   pyupgrade_              A tool to automatically upgrade syntax for newer versions.
    reorder-python-imports_ Tool for reordering python imports
-   safety_                 Checks installed dependencies for known vulnerabilities
+   safety_                 Checks installed dependencies for known vulnerabilities.
    sphinx_                 Python documentation generator
-   sphinx-autobuild_       Watch a Sphinx directory and rebuild the documentation when a change is detected
+   sphinx-autobuild_       Rebuild Sphinx documentation on changes, with live-reload in the browser.
    sphinx-click_           Sphinx extension that automatically documents click applications
-   sphinx-rtd-theme_       Read the Docs theme for Sphinx
    typeguard_              Run-time type checker for Python
    xdoctest_               A rewrite of the builtin doctest module
    ======================= ====================================================================================
@@ -1099,7 +1095,6 @@ Overview of Nox sessions
 The following table gives an overview of the available Nox sessions:
 
 .. table:: Nox sessions
-   :class: hypermodern-table
    :widths: auto
 
    ========================================== ===================================== ================== =========
@@ -1644,13 +1639,13 @@ Overview of pre-commit hooks
 The |HPC| comes with a pre-commit configuration consisting of the following hooks:
 
 .. table:: pre-commit hooks
-   :class: hypermodern-table
    :widths: auto
 
    ======================== ===============================================
    `black <Black_>`__       Run the Black_ code formatter
    `flake8 <Flake8_>`__     Run the Flake8_ linter
    `prettier <Prettier_>`__ Run the Prettier_ code formatter
+   pyupgrade_               Upgrade syntax to newer versions of Python
    check-added-large-files_ Prevent giant files from being committed
    check-toml_              Validate TOML_ files
    check-yaml_              Validate YAML_ files
@@ -1703,6 +1698,20 @@ and moves them after normal imports.
 Any duplicate imports are removed.
 
 
+The pyupgrade hook
+------------------
+
+pyupgrade_ upgrades your source code
+to newer versions of the Python language and standard library.
+The tool analyzes the `abstract syntax tree`__ of the modules in your project,
+replacing deprecated or legacy usages with modern idioms.
+
+The minimum supported Python version is declared in the relevant section of ``.pre-commit-config.yaml``.
+You should change this setting whenever you drop support for an old version of Python.
+
+__ https://docs.python.org/3/library/ast.html
+
+
 Hooks from pre-commit-hooks
 ---------------------------
 
@@ -1738,7 +1747,6 @@ The following table lists the Flake8 plugins used by the |HPC|,
 and links to their lists of error codes.
 
 .. table:: Flake8 plugins
-   :class: hypermodern-table
    :widths: auto
 
    ================================ ============================================= ======================================
@@ -2076,7 +2084,6 @@ __ https://docs.github.com/en/github/administering-a-repository/configuration-op
 It manages the following dependencies:
 
 .. table::
-   :class: hypermodern-table
    :widths: auto
 
    =================== ===================================== ================================================
@@ -2175,7 +2182,6 @@ Overview of workflows
 The |HPC| defines the following workflows:
 
 .. table:: GitHub Actions workflows
-   :class: hypermodern-table
    :widths: auto
 
    ===================================================== ======================== ==================================== =====================
@@ -2193,7 +2199,6 @@ Overview of GitHub Actions
 Workflows use the following GitHub Actions:
 
 .. table:: GitHub Actions
-   :class: hypermodern-table
    :widths: auto
 
    ============================================ =========================================================
@@ -2272,7 +2277,6 @@ as shown in the table below:
 __ https://help.github.com/en/actions/automating-your-workflow-with-github-actions/virtual-environments-for-github-hosted-runners#supported-runners-and-hardware-resources
 
 .. table:: Jobs in the Tests workflow
-   :class: hypermodern-table
    :widths: auto
 
    ========================================== ====================== ==================
@@ -2335,7 +2339,6 @@ You can generate these tokens from your account settings on these services.
 The tokens need to be stored as secrets in the repository settings on GitHub:
 
 .. table:: Secrets
-   :class: hypermodern-table
    :widths: auto
 
    =================== ===================
@@ -2636,4 +2639,3 @@ __ https://cjolowicz.github.io/posts/hypermodern-python-01-setup/
 .. _reorder-python-imports: https://github.com/asottile/reorder_python_imports
 .. _reStructuredText: https://docutils.sourceforge.io/rst.html
 .. _sphinx-autobuild: https://github.com/executablebooks/sphinx-autobuild
-.. _sphinx-rtd-theme: https://sphinx-rtd-theme.readthedocs.io

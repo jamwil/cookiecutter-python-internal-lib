@@ -214,20 +214,12 @@ Creating a project
 
 Create a project from this template
 by pointing Cookiecutter to its `GitHub repository <Hypermodern Python Cookiecutter_>`__.
-<<<<<<< HEAD
-Use the ``--checkout`` option with the `current stable release <2021.11.8_>`__:
-=======
 Use the ``--checkout`` option with the `current stable release <2021.11.10_>`__:
->>>>>>> cjolowicz/main
 
 .. code:: console
 
    $ cookiecutter gh:cjolowicz/cookiecutter-hypermodern-python \
-<<<<<<< HEAD
-     --checkout="2021.11.8"
-=======
      --checkout="2021.11.10"
->>>>>>> cjolowicz/main
 
 Cookiecutter downloads the template,
 and asks you a series of questions about project variables,

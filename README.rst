@@ -68,7 +68,7 @@ Usage
 
 .. code:: console
 
-   $ cookiecutter gh:cjolowicz/cookiecutter-hypermodern-python --checkout=2021.11.10
+   $ cookiecutter gh:cjolowicz/cookiecutter-hypermodern-python --checkout=2021.11.26
 
 
 Features

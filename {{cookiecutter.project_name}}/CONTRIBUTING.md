@@ -1,17 +1,14 @@
 # Contributor Guide
 
 Thank you for your interest in improving this project.
-This project is open-source under the [{{cookiecutter.license.replace("-", " ")}} license] and
-welcomes contributions in the form of bug reports, feature requests, and pull requests.
+This project welcomes contributions in the form of bug reports, feature requests, and pull requests.
 
 Here is a list of important resources for contributors:
 
 - [Source Code]
-- [Documentation]
 - [Issue Tracker]
 - [Code of Conduct]
 
-[{{cookiecutter.license.replace("-", " ").lower()}} license]: https://opensource.org/licenses/{{cookiecutter.license}}
 [source code]: https://github.com/{{cookiecutter.github_user}}/{{cookiecutter.project_name}}
 [documentation]: https://{{cookiecutter.project_name}}.readthedocs.io/
 [issue tracker]: https://github.com/{{cookiecutter.github_user}}/{{cookiecutter.project_name}}/issues

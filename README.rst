@@ -4,7 +4,6 @@ cookiecutter-python-internal-lib
 
 Fork of cjolowicz/cookiecutter-hypermodern-python with modifications to support non-public internal development tools.
 
-- Removes support for old versions of Python (<3.9)
 - Github Actions do not push to PyPI or TestPyPI
 - Allows for closed source license
 

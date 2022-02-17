@@ -4,7 +4,6 @@ cookiecutter-python-internal-lib
 
 Fork of cjolowicz/cookiecutter-hypermodern-python with modifications to support non-public internal development tools.
 
-- Removes support for old versions of Python (<3.9)
 - Github Actions do not push to PyPI or TestPyPI
 - Allows for closed source license
 
@@ -80,11 +79,12 @@ Features
 - Test automation with Nox_
 - Linting with pre-commit_ and Flake8_
 - Continuous integration with `GitHub Actions`_
-- Documentation with Sphinx_ and `Read the Docs`_ using the furo_ theme
+- Documentation with Sphinx_, MyST_, and `Read the Docs`_ using the furo_ theme
 - Automated uploads to PyPI_ and TestPyPI_
 - Automated release notes with `Release Drafter`_
 - Automated dependency updates with Dependabot_
 - Code formatting with Black_ and Prettier_
+- Import sorting with isort_
 - Testing with pytest_
 - Code coverage with Coverage.py_
 - Coverage reporting with Codecov_
@@ -114,6 +114,8 @@ The template supports Python 3.7, 3.8, 3.9, and 3.10.
 .. _Flake8: http://flake8.pycqa.org
 .. _GitHub Actions: https://github.com/features/actions
 .. _Hypermodern Python: https://medium.com/@cjolowicz/hypermodern-python-d44485d9d769
+.. _isort: https://pycqa.github.io/isort/
+.. _MyST: https://myst-parser.readthedocs.io/
 .. _Nox: https://nox.thea.codes/
 .. _Poetry: https://python-poetry.org/
 .. _Prettier: https://prettier.io/

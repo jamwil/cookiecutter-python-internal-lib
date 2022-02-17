@@ -263,6 +263,7 @@ Here is a complete list of the project variables defined by this template:
    ``email``              E-mail address of the author      katherine@example.com
    ``github_user``        GitHub username of the author     ``katherine``
    ``version``            Initial project version           ``0.0.0``
+   ``copyright_year``     The project copyright year        ``2022``
    ``license``            The project license               ``MIT``
    ``development_status`` Development status of the project ``Development Status :: 3 - Alpha``
    ====================== ================================= ===================================
@@ -384,33 +385,34 @@ For more details on these files, refer to the section :ref:`The test suite`.
    ``tests/test_main.py``                Test cases for ``__main__``
    ===================================== ===============================
 
-The project documentation is written in reStructuredText_.
+The project documentation is written in Markdown_.
 The documentation files in the top-level directory are rendered on GitHub_:
 
 .. table:: Documentation files (top-level)
    :widths: auto
 
-   ======================= ============================================
-   ``README.rst``          Project description for GitHub and PyPI
-   ``CONTRIBUTING.rst``    Contributor Guide
-   ``CODE_OF_CONDUCT.rst`` Code of Conduct
-   ``LICENSE.rst``         License
-   ======================= ============================================
+   ====================== ============================================
+   ``README.md``          Project description for GitHub and PyPI
+   ``CONTRIBUTING.md``    Contributor Guide
+   ``CODE_OF_CONDUCT.md`` Code of Conduct
+   ``LICENSE``            License
+   ====================== ============================================
 
 The files in the ``docs`` directory are
-built using :ref:`Sphinx <Documentation>` and
-hosted on :ref:`Read the Docs <Read the Docs integration>`:
+built using :ref:`Sphinx <Documentation>` and MyST_.
+The Sphinx documentation is hosted on :ref:`Read the Docs <Read the Docs integration>`:
 
 .. table:: Documentation files (Sphinx)
    :widths: auto
 
-   ====================== =======================================================
-   ``index.rst``          Main document
-   ``contributing.rst``   Contributor Guide (via include)
-   ``codeofconduct.rst``  Code of Conduct (via include)
-   ``license.rst``        License (via include)
-   ``reference.rst``      API reference
-   ====================== =======================================================
+   ===================== =======================================================
+   ``index.md``          Main document
+   ``contributing.md``   Contributor Guide (via include)
+   ``codeofconduct.md``  Code of Conduct (via include)
+   ``license.md``        License (via include)
+   ``reference.md``      API reference
+   ``usage.md``          Command-line reference
+   ===================== =======================================================
 
 The ``.github/workflows`` directory contains the :ref:`GitHub Actions workflows <GitHub Actions workflows>`:
 
@@ -445,10 +447,13 @@ and links each file to a section with more details.
    ``codecov.yml``                       Configuration for :ref:`Codecov <Codecov integration>`
    ``docs/conf.py``                      Configuration for :ref:`Sphinx <Documentation>`
    ``noxfile.py``                        Configuration for :ref:`Nox <Using Nox>`
-   ``pyproject.toml``                    :ref:`Python package <The pyproject.toml file>` configuration,
-                                         and configuration for :ref:`Coverage.py <The coverage session>`
+   ``pyproject.toml``                    Configuration for :ref:`Poetry <Using Poetry>`,
+                                         :ref:`Coverage.py <The coverage session>`,
+                                         :ref:`isort <The isort hook>`,
                                          and :ref:`mypy <Type-checking with mypy>`
    ===================================== ========================================
+
+The ``pyproject.toml`` file is described in more detail :ref:`below <The pyproject.toml file>`.
 
 .. _.gitignore: https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring
 
@@ -556,56 +561,57 @@ refer to the section :ref:`The tests session`.
 Documentation
 -------------
 
-The project documentation is written in reStructuredText_
-and processed by the Sphinx_ documentation engine.
+The project documentation is written in Markdown_
+and processed by the Sphinx_ documentation engine using the MyST_ extension.
 
 The top-level directory contains several stand-alone documentation files:
 
-``README.rst``
+``README.md``
    This file is your main project page and displayed on GitHub and PyPI.
 
-``CONTRIBUTING.rst``
+``CONTRIBUTING.md``
    The Contributor Guide explains how other people can contribute to your project.
 
-``CODE_OF_CONDUCT.rst``
+``CODE_OF_CONDUCT.md``
    The Code of Conduct outlines the behavior
    expected from participants of your project.
    It is adapted from the `Contributor Covenant`_, version 2.0.
 
 .. _Contributor Covenant: https://www.contributor-covenant.org
 
-``LICENSE.rst``
+``LICENSE.md``
    This file contains the text of your project's license.
 
 .. note::
 
    The files above are also rendered on GitHub and PyPI.
-   Keep them in plain reStructuredText, without Sphinx extensions.
+   Keep them in plain Markdown, without MyST_ syntax extensions.
 
-The documentation files in the ``docs`` directory are built using Sphinx_:
+The documentation files in the ``docs`` directory are built using Sphinx_ and MyST_:
 
-``index.rst``
+``index.md``
    This is the main documentation page.
+   It includes the project description from ``README.md``.
    This file also defines the navigation menu,
    with links to other documentation pages.
    The *Changelog* menu entry
    links to the `GitHub Releases <GitHub Release_>`__ page of your project.
 
-``contributing.rst``
-   This file includes the Contributor Guide from ``CONTRIBUTING.rst``.
+``contributing.md``
+   This file includes the Contributor Guide from ``CONTRIBUTING.md``.
 
-``codeofconduct.rst``
-   This file includes the Code of Conduct from ``CODE_OF_CONDUCT.rst``.
+``codeofconduct.md``
+   This file includes the Code of Conduct from ``CODE_OF_CONDUCT.md``.
 
-``license.rst``
-   This file includes the license from ``LICENSE.rst``.
+``license.md``
+   This file includes the license from ``LICENSE.md``.
 
-``reference.rst``
+``reference.md``
    The API reference for your project.
    It is generated from docstrings and type annotations in the source code,
    using the autodoc_ and napoleon_ extensions.
 
-``usage.rst``
+``usage.md``
    The command-line reference for your project.
    It is generated by inspecting the click_ entry-point in your package,
    using the sphinx-click_ extension.
@@ -650,8 +656,16 @@ specified in `PEP 517`_ and `518 <PEP 518_>`__:
   This template uses Poetry_ as the build system.
 - The ``tool`` table contains sub-tables
   where tools can store configuration under their PyPI_ name.
-  Poetry stores its configuration in the ``tool.poetry`` table.
-  Coverage.py_ stores its configuration in the ``tool.coverage`` table.
+
+.. table:: Tool configurations in pyproject.toml
+   :widths: auto
+
+   ======================= ===============================
+   ``tool.coverage``       Configuration for Coverage.py_
+   ``tool.isort``          Configuration for isort_
+   ``tool.mypy``           Configuration for mypy_
+   ``tool.poetry``         Configuration for Poetry_
+   ======================= ===============================
 
 The ``tool.poetry`` table
 contains the metadata for your package,
@@ -663,32 +677,26 @@ for a detailed description of each configuration key.
 .. _pyproject.toml: https://python-poetry.org/docs/pyproject/
 
 
+.. _Version constraints:
+
 Version constraints
 -------------------
+
+.. admonition:: TL;DR
+
+   This project template omits upper bounds from all version constraints.
+
+   You are encouraged to manually remove upper bounds
+   for dependencies you add to your project using Poetry:
+
+   1. Replace ``^1.2.3`` with ``>=1.2.3`` in ``pyproject.toml``
+   2. Run ``poetry lock --no-update`` to update ``poetry.lock``
 
 `Version constraints <Versions and constraints_>`_ express
 which versions of dependencies are compatible with your project.
 In the case of core dependencies,
 they are also a part of distribution packages,
 and as such affect end-users of your package.
-
-For every dependency added to your project,
-Poetry writes a version constraint to ``pyproject.toml``.
-Dependencies are kept in two TOML tables:
-
-- ``tool.poetry.dependencies``---for core dependencies
-- ``tool.poetry.dev-dependencies``---for development dependencies
-
-By default, version constraints require users to have at least
-the version that was current when the dependency was added to the project.
-Users can also upgrade to newer releases of dependencies,
-as long as the version number does not indicate a breaking change.
-(According to the `Semantic Versioning`_ standard,
-only major releases may contain breaking changes,
-once a project has reached version 1.0.0.)
-
-.. _Versions and constraints: https://python-poetry.org/docs/dependency-specification/
-.. _Semantic Versioning: https://semver.org/
 
 .. note::
 
@@ -698,7 +706,7 @@ once a project has reached version 1.0.0.)
    - *Core dependencies* are required by users running your code,
      and typically consist of third-party libraries imported by your package.
      When your package is distributed,
-     the package metainfo includes these dependencies,
+     the `package metadata`_ includes these dependencies,
      allowing tools like pip_ to automatically install them alongside your package.
 
    - *Development dependencies* are only required by developers working on your code.
@@ -707,6 +715,66 @@ once a project has reached version 1.0.0.)
      or to build documentation.
      These dependencies are not a part of distribution packages,
      because users do not require them to run your code.
+
+For every dependency added to your project,
+Poetry writes a version constraint to ``pyproject.toml``.
+Dependencies are kept in two TOML tables:
+
+- ``tool.poetry.dependencies``---for core dependencies
+- ``tool.poetry.dev-dependencies``---for development dependencies
+
+By default, version constraints added by Poetry have both a lower and an upper bound:
+
+- The lower bound requires users of your package to have at least the version
+  that was current when you added the dependency.
+- The upper bound allows users to upgrade to newer releases of dependencies,
+  as long as the version number does not indicate a breaking change.
+
+According to the `Semantic Versioning`_ standard,
+only major releases may contain breaking changes,
+once a project has reached version 1.0.0.
+A major release is one that increments the major version
+(the first component of the version identifier).
+An example for such a version constraint would be ``^1.2.3``,
+which is a Poetry-specific shorthand equivalent to ``>= 1.2.3, < 2``.
+
+This project template omits upper bounds from all version constraints,
+in a conscious departure from Poetry's defaults.
+There are two separate reasons for removing version caps,
+one principled, the other pragmatic:
+
+1. Version caps lead to problems in the Python ecosystem due to its flat dependency management.
+2. Version caps lead to frequent merge conflicts between dependency updates.
+
+The first point is treated in detail in the following articles:
+
+- `Should You Use Upper Bound Version Constraints? <https://iscinumpy.dev/post/bound-version-constraints/>`__ and `Poetry Versions <https://iscinumpy.dev/post/poetry-versions/>`__ by Henry Schreiner
+- `Semantic Versioning Will Not Save You <https://hynek.me/articles/semver-will-not-save-you/>`__ by Hynek Schlawack
+- `Version numbers: how to use them? <https://bernat.tech/posts/version-numbers/>`__ by Bernát Gábor
+- `Why I don't like SemVer anymore <https://snarky.ca/why-i-dont-like-semver/>`__ by Brett Cannon
+
+The second point is ultimately due to the fact that
+every updated version constraint changes a hashsum in the ``poetry.lock`` file.
+This means that PRs updating version constraints will *always* conflict with each other.
+
+.. note::
+
+   The problem with merge conflicts is greatly exacerbated by a `Dependabot issue <Dependabot issue 4435_>`_:
+   Dependabot updates version constraints in ``pyproject.toml``
+   even when the version constraint already covered the new version.
+   This can be avoided using a configuration setting
+   where only the lock file is ever updated, not the version constraints.
+   Omitting version caps makes the lockfile-only strategy a viable alternative.
+
+Poetry will still add ``^1.2.3``-style version constraints whenever you add a dependency.
+You should edit the version constraint in ``pyproject.toml``,
+replacing ``^1.2.3`` with ``>=1.2.3`` to remove the upper bound.
+Then update the lock file by invoking ``poetry lock --no-update``.
+
+.. _package metadata: https://packaging.python.org/en/latest/specifications/core-metadata/
+.. _Versions and constraints: https://python-poetry.org/docs/dependency-specification/
+.. _Semantic Versioning: https://semver.org/
+.. _Dependabot issue 4435: https://github.com/dependabot/dependabot-core/issues/4435
 
 
 .. _The lock file:
@@ -745,35 +813,37 @@ See the table below for an overview of the dependencies of generated projects:
 .. table:: Dependencies
    :widths: auto
 
-   ======================= ====================================================================================
-   black_                  The uncompromising code formatter.
-   click_                  Composable command line interface toolkit
-   coverage__              Code coverage measurement for Python
-   darglint_               A utility for ensuring Google-style docstrings stay up to date with the source code.
-   flake8_                 the modular source code checker: pep8 pyflakes and co
-   flake8-bandit_          Automated security testing with bandit and flake8.
-   flake8-bugbear_         A plugin for flake8 finding likely bugs and design problems in your program.
-   flake8-docstrings_      Extension for flake8 which uses pydocstyle to check docstrings
-   flake8-rst-docstrings_  Python docstring reStructuredText (RST) validator
-   furo_                   A clean customisable Sphinx documentation theme.
-   mypy_                   Optional static typing for Python
-   pep8-naming_            Check PEP-8 naming conventions, plugin for flake8
-   pre-commit_             A framework for managing and maintaining multi-language pre-commit hooks.
-   pre-commit-hooks_       Some out-of-the-box hooks for pre-commit.
-   pygments_               Pygments is a syntax highlighting package written in Python.
-   pytest_                 pytest: simple powerful testing with Python
-   pyupgrade_              A tool to automatically upgrade syntax for newer versions.
-   reorder-python-imports_ Tool for reordering python imports
-   safety_                 Checks installed dependencies for known vulnerabilities.
-   sphinx_                 Python documentation generator
-   sphinx-autobuild_       Rebuild Sphinx documentation on changes, with live-reload in the browser.
-   sphinx-click_           Sphinx extension that automatically documents click applications
-   typeguard_              Run-time type checker for Python
-   xdoctest_               A rewrite of the builtin doctest module
-   ======================= ====================================================================================
+   ====================== ====================================================================================
+   black_                 The uncompromising code formatter.
+   click_                 Composable command line interface toolkit
+   coverage__             Code coverage measurement for Python
+   darglint_              A utility for ensuring Google-style docstrings stay up to date with the source code.
+   flake8_                the modular source code checker: pep8 pyflakes and co
+   flake8-bandit_         Automated security testing with bandit and flake8.
+   flake8-bugbear_        A plugin for flake8 finding likely bugs and design problems in your program.
+   flake8-docstrings_     Extension for flake8 which uses pydocstyle to check docstrings
+   flake8-rst-docstrings_ Python docstring reStructuredText (RST) validator
+   furo_                  A clean customisable Sphinx documentation theme.
+   isort_                 A Python utility / library to sort Python imports.
+   mypy_                  Optional static typing for Python
+   pep8-naming_           Check PEP-8 naming conventions, plugin for flake8
+   pre-commit_            A framework for managing and maintaining multi-language pre-commit hooks.
+   pre-commit-hooks_      Some out-of-the-box hooks for pre-commit.
+   pygments_              Pygments is a syntax highlighting package written in Python.
+   pytest_                pytest: simple powerful testing with Python
+   pyupgrade_             A tool to automatically upgrade syntax for newer versions.
+   safety_                Checks installed dependencies for known vulnerabilities.
+   sphinx_                Python documentation generator
+   sphinx-autobuild_      Rebuild Sphinx documentation on changes, with live-reload in the browser.
+   sphinx-click_          Sphinx extension that automatically documents click applications
+   typeguard_             Run-time type checker for Python
+   xdoctest_              A rewrite of the builtin doctest module
+   ====================== ====================================================================================
 
 __ Coverage.py_
 
+
+.. _Using Poetry:
 
 Using Poetry
 ~~~~~~~~~~~~
@@ -802,6 +872,15 @@ Use the command `poetry add`_ to add a dependency for your package:
    $ poetry add foobar        # for core dependencies
    $ poetry add --dev foobar  # for development dependencies
 
+.. important::
+
+   It is recommended to remove the upper bound from the version constraint added by Poetry:
+
+   1. Edit ``pyproject.toml`` to replace ``^1.2.3`` with ``>=1.2.3`` in the dependency entry
+   2. Update ``poetry.lock`` using the command ``poetry lock --no-update``
+
+   See `Version constraints`_ for more details.
+
 Use the command `poetry remove`_ to remove a dependency from your package:
 
 .. code:: console
@@ -818,15 +897,11 @@ Use the command `poetry update`_ to upgrade the dependency to a new release:
 
 .. _poetry update: https://python-poetry.org/docs/cli/#update
 
-To upgrade to a new major release,
-you normally need to update the version constraint for the dependency,
-in the ``pyproject.toml`` file.
-
 .. note::
 
    Dependencies in the |HPC| are managed by :ref:`Dependabot <Dependabot integration>`.
    When newer versions of dependencies become available,
-   Dependabot updates the ``pyproject.toml`` and ``poetry.lock`` files and submits a pull request.
+   Dependabot updates the ``poetry.lock`` file and submits a pull request.
 
 
 Installing the package for development
@@ -1119,7 +1194,7 @@ The following table gives an overview of the available Nox sessions:
    :ref:`pre-commit <The pre-commit session>` Lint with pre-commit_                 ``3.10``               ✓
    :ref:`safety <The safety session>`         Scan dependencies with Safety_        ``3.10``               ✓
    :ref:`tests <The tests session>`           Run tests with pytest_                ``3.7`` … ``3.10``     ✓
-   :ref:`typeguard <The typeguard session>`   Type-check with Typeguard_            ``3.7`` … ``3.10``     ✓
+   :ref:`typeguard <The typeguard session>`   Type-check with Typeguard_            ``3.10``               ✓
    :ref:`xdoctest <The xdoctest session>`     Run examples with xdoctest_           ``3.7`` … ``3.10``     ✓
    ========================================== ===================================== ================== =========
 
@@ -1362,13 +1437,7 @@ The typeguard session runs the test suite with runtime type-checking enabled.
 It is similar to the :ref:`tests session <The tests session>`,
 with the difference that your package is instrumented by Typeguard.
 
-You can run the session with a specific Python version.
-For example, the following command runs the session
-with the current stable release of Python:
-
-.. code:: console
-
-   $ nox --session=typeguard --python=3.10
+This session always runs with the current stable release of Python.
 
 Use the separator ``--`` to pass additional options and arguments to pytest.
 For example, the following command runs only tests for the ``__main__`` module:
@@ -1635,7 +1704,7 @@ validating changes staged for a commit.
 
 Requiring changes to be staged allows for a nice property:
 Many pre-commit hooks support fixing offending lines automatically,
-for example ``black``, ``prettier``, and ``reorder-python-imports``.
+for example ``black``, ``prettier``, and ``isort``.
 When this happens,
 your original changes are in the staging area,
 while the fixes are in the work tree.
@@ -1659,13 +1728,13 @@ The |HPC| comes with a pre-commit configuration consisting of the following hook
    ======================== ===============================================
    `black <Black_>`__       Run the Black_ code formatter
    `flake8 <Flake8_>`__     Run the Flake8_ linter
+   isort_                   Rewrite source code to sort Python imports
    `prettier <Prettier_>`__ Run the Prettier_ code formatter
    pyupgrade_               Upgrade syntax to newer versions of Python
    check-added-large-files_ Prevent giant files from being committed
    check-toml_              Validate TOML_ files
    check-yaml_              Validate YAML_ files
    end-of-file-fixer_       Ensure files are terminated by a single newline
-   reorder-python-imports_  Rewrites source to reorder python imports
    trailing-whitespace_     Ensure lines do not contain trailing whitespace
    ======================== ===============================================
 
@@ -1702,15 +1771,25 @@ Flake8_ is an extensible linter framework for Python.
 For more details, see the section :ref:`Linting with Flake8`.
 
 
-The reorder-python-imports hook
--------------------------------
+.. _The isort hook:
 
-reorder-python-imports_ sorts imports in your Python code.
+The isort hook
+--------------
+
+isort_ reorders imports in your Python code.
 Imports are separated into three sections,
 as recommended by `PEP 8`_: standard library, third party, first party.
-The tool also splits ``from`` imports onto separate lines to avoid merge conflicts,
-and moves them after normal imports.
-Any duplicate imports are removed.
+There are two additional sections,
+one at the top for `future imports <https://docs.python.org/3/library/__future__.html>`__,
+the other at the bottom for `relative imports <https://docs.python.org/3/reference/import.html#package-relative-imports>`__.
+Within each section, ``from`` imports follow normal imports.
+Imports are then sorted alphabetically.
+
+The |HPC| activates the `Black profile <https://pycqa.github.io/isort/docs/configuration/black_compatibility.html>`__ for compatibility with the Black code formatter.
+Furthermore, the `force_single_line <https://pycqa.github.io/isort/docs/configuration/options.html#force-single-line>`__ setting is enabled.
+This splits imports onto separate lines to avoid merge conflicts.
+Finally, two blank lines are enforced after imports for consistency,
+via the `lines_after_imports <https://pycqa.github.io/isort/docs/configuration/options.html#lines-after-imports>`__ setting.
 
 
 The pyupgrade hook
@@ -2104,8 +2183,7 @@ It manages the following dependencies:
    =================== ===================================== ================================================
    Type of dependency  Managed files                         See also
    =================== ===================================== ================================================
-   Python              | ``pyproject.toml``                  :ref:`Managing Dependencies`
-                       | ``poetry.lock``
+   Python              ``poetry.lock``                       :ref:`Managing Dependencies`
    Python              ``docs/requirements.txt``             :ref:`Read the Docs <Read the Docs integration>`
    Python              ``.github/workflows/constraints.txt`` :ref:`Workflow constraints`
    GitHub Action       ``.github/workflows/*.yml``           :ref:`GitHub Actions workflows`
@@ -2626,6 +2704,7 @@ __ https://cjolowicz.github.io/posts/hypermodern-python-01-setup/
 .. _GitHub Release: https://help.github.com/en/github/administering-a-repository/about-releases
 .. _Hypermodern Python Cookiecutter: https://github.com/cjolowicz/cookiecutter-hypermodern-python
 .. _Jinja: https://palletsprojects.com/p/jinja/
+.. _Markdown: https://spec.commonmark.org/current/
 .. _MIT license: https://opensource.org/licenses/MIT
 .. _PEP 257: http://www.python.org/dev/peps/pep-0257/
 .. _PEP 440: https://www.python.org/dev/peps/pep-0440/
@@ -2651,6 +2730,5 @@ __ https://cjolowicz.github.io/posts/hypermodern-python-01-setup/
 .. _pydocstyle: http://www.pydocstyle.org/
 .. _pyflakes: https://github.com/PyCQA/pyflakes
 .. _pygments: https://pygments.org/
-.. _reorder-python-imports: https://github.com/asottile/reorder_python_imports
 .. _reStructuredText: https://docutils.sourceforge.io/rst.html
 .. _sphinx-autobuild: https://github.com/executablebooks/sphinx-autobuild
